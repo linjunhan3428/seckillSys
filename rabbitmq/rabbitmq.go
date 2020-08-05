@@ -11,26 +11,26 @@ const MQURL = "amqp://guest:guest@localhost:5672/"
 
 //rabbitMQ结构体
 type RabbitMQ struct {
-	conn      *amqp.Connection
-	channel   *amqp.Channel
+	conn    *amqp.Connection
+	channel *amqp.Channel
 	//队列名称
 	QueueName string
 	//交换机名称
-	Exchange  string
+	Exchange string
 	//bind Key 名称
 	Key string
 	//连接信息
-	Mqurl     string
+	Mqurl string
 }
 
 // 创建结构体实例
-func NewRabbitMq(queueName string, exchange string, key string) *RabbitMQ{
+func NewRabbitMq(queueName string, exchange string, key string) *RabbitMQ {
 
 	return &RabbitMQ{
 		QueueName: queueName,
-		Exchange: exchange,
-		Key: key,
-		Mqurl: MQURL,
+		Exchange:  exchange,
+		Key:       key,
+		Mqurl:     MQURL,
 	}
 }
 
