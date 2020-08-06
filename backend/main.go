@@ -18,29 +18,27 @@ func main() {
 
 	//连接数据库
 	db, err := common.NewMysqlConn()
+	defer db.Close()
 	if err != nil {
 		log.Error(err)
 	}
 	pc := controllers.NewProductController(db)
+	oc := controllers.NewOrderController(db)
 
-	router.GET("/product/all", func(c *gin.Context) {
-		pc.GetAll(c)
-	})
-	router.GET("/product/delete", func(c *gin.Context) {
-		pc.GetDelete(c)
-	})
-	router.GET("/product/manager", func(c *gin.Context) {
-		pc.GetManager(c)
-	})
-	router.POST("/product/update", func(c *gin.Context) {
-		pc.PostUpdate(c)
-	})
-	router.GET("/product/add", func(c *gin.Context) {
-		pc.GetAdd(c)
-	})
-	router.POST("/product/add", func(c *gin.Context) {
-		pc.PostAdd(c)
-	})
+	productRouter := router.Group("/product")
+	{
+		productRouter.GET("/all", func(c *gin.Context) { pc.GetAll(c) })
+		productRouter.GET("/delete", func(c *gin.Context) { pc.GetDelete(c) })
+		productRouter.GET("/manager", func(c *gin.Context) { pc.GetManager(c) })
+		productRouter.POST("/update", func(c *gin.Context) { pc.PostUpdate(c) })
+		productRouter.GET("/add", func(c *gin.Context) { pc.GetAdd(c) })
+		productRouter.POST("/add", func(c *gin.Context) { pc.PostAdd(c) })
+	}
+
+	orderRouter := router.Group("/order")
+	{
+		orderRouter.GET("/all", func(c *gin.Context) { oc.Get(c) })
+	}
 
 	router.Run(":3428")
 }

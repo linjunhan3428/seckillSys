@@ -16,8 +16,8 @@ func TestInsert(t *testing.T) {
 
 	manager := NewProductManager("product", db)
 
-	//num, err := manager.Insert(&datamodels.Product{122, "mac", 100, "xxxxzzz", "httpd"})
-	//assert.NoError(t, err)
+	_, err = manager.Insert(&datamodels.Product{129, "被子", 100, "xxxxzzz", "httpd"})
+	assert.NoError(t, err)
 	//assert.Equal(t, int64(126), num)
 
 	products, err := manager.SelectAll()
@@ -26,12 +26,12 @@ func TestInsert(t *testing.T) {
 		fmt.Println(v.ID, v.ProductImage, v.ProductName, v.ProductNum, v.ProductUrl)
 	}
 
-	err = manager.Update(&datamodels.Product{123, "mac", 100, "aaajjjj", "httpd"})
-	assert.NoError(t, err)
+	//err = manager.Update(&datamodels.Product{123, "mac", 100, "aaajjjj", "httpd"})
+	//assert.NoError(t, err)
 
-	product, err := manager.SelectByKey(123)
-	assert.NoError(t, err)
-	fmt.Println(product.ProductName, product.ProductUrl, product.ProductNum, product.ProductImage)
+	//product, err := manager.SelectByKey(123)
+	//assert.NoError(t, err)
+	//fmt.Println(product.ProductName, product.ProductUrl, product.ProductNum, product.ProductImage)
 
 	//b := manager.Delete(126)
 	//assert.Equal(t, true, b)
