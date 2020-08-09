@@ -14,7 +14,7 @@ func main() {
 	router := gin.Default()
 
 	router.LoadHTMLGlob("/Users/linjunhan/project/seckillSys/backend/web/views/**/*")
-	router.Static("/assets", "/Users/linjunhan/project/seckillSys/backend/web/assets")
+	router.Static("/Users/linjunhan/project/seckillSys/backend/web/assets", "/assets")
 
 	//连接数据库
 	db, err := common.NewMysqlConn()
